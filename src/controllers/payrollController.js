@@ -1,14 +1,14 @@
-const payrollRecordRepository = require('../repositories/payrollRecordRepository');
+const payrollRepository = require('../repositories/payrollRepository');
 const ValidationContract = require('../util/validators');
 
-exports.createPayrollRecord = async (req, res) => {
+exports.createPayroll = async (req, res) => {
   let validators = new ValidationContract();
   //validators.isRequired(req.body.payroll, 'Payroll is required');
 
   try {
     if (validators.isValid()) {
-      await payrollRecordRepository.createPayrollRecord(req.body);
-      res.status(201).send('payrollRecord created!');
+      await payrollRepository.createPayroll(req.body);
+      res.status(201).send('payroll created!');
     } else {
       res.status(400).send({
         errors: validators.getErrors(),
@@ -21,14 +21,13 @@ exports.createPayrollRecord = async (req, res) => {
   }
 };
 
-exports.findAllPayrollRecords = async (req, res) => {
+exports.findAllPayrolls = async (req, res) => {
   try {
-    const payrollRecords =
-      await payrollRecordRepository.findAllPayrollRecords();
-    if (payrollRecords == null || payrollRecords.length == 0) {
-      res.status(204).send('No payrollRecords found');
+    const payrolls = await payrollRepository.findAllPayrolls();
+    if (payrolls == null || payrolls.length == 0) {
+      res.status(204).send('No payrolls found');
     } else {
-      res.status(200).send(payrollRecords);
+      res.status(200).send(payrolls);
     }
   } catch (error) {
     res.status(500).send({
@@ -37,32 +36,28 @@ exports.findAllPayrollRecords = async (req, res) => {
   }
 };
 
-exports.findPayrollRecordById = async (req, res) => {
-  const payrollRecordId = req.params.id;
-  if (payrollRecords == null) {
-    res.status(400).send('payrollRecordId is required');
+exports.findPayrollById = async (req, res) => {
+  const payrollId = req.params.id;
+  if (payrollId == null) {
+    res.status(400).send('payrollId is required');
   }
-  const payrollRecord =
-    payrollRecordRepository.findPayrollRecordById(payrollRecordId);
+  const payroll = payrollRepository.findPayrollById(payrollId);
 
-  if (!payrollRecord) {
+  if (!payroll) {
     res.status(404).send();
   }
 
-  res.status(200).send(payrollRecord);
+  res.status(200).send(payroll);
 };
 
-exports.updatePayrollRecordById = async (req, res) => {
-  const payrollRecordId = req.params.id;
-  await payrollRecordRepository.updatePayrollRecordById(
-    payrollRecordId,
-    req.body,
-  );
-  res.status(200).send('payrollRecord updated', req.body);
+exports.updatePayrollById = async (req, res) => {
+  const payrollId = req.params.id;
+  await payrollRepository.updatePayrollById(payrollId, req.body);
+  res.status(200).send('payroll updated', req.body);
 };
 
-exports.deletePayrollRecordById = async (req, res) => {
-  const payrollRecordId = req.params.id;
-  await payrollRecordRepository.deletePayrollRecordById(payrollRecordId);
-  res.status(204).send('payrollRecord deleted', req.body);
+exports.deletePayrollById = async (req, res) => {
+  const payrollId = req.params.id;
+  await payrollRepository.deletePayrollById(payrollId);
+  res.status(204).send('payroll deleted', req.body);
 };

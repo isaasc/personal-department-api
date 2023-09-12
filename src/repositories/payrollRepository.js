@@ -1,6 +1,5 @@
-const { default: mongoose } = require('mongoose');
-
-const Payroll = mongoose.model('Attendant');
+const mongoose = require('mongoose');
+const Payroll = mongoose.model('Payroll');
 
 exports.createPayroll = async (payroll) => {
   const createdPayroll = Payroll(payroll);

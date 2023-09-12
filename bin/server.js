@@ -1,6 +1,6 @@
 const http = require('http');
 const app = require('../src/app');
-const port = searchPort(process.env.PORT || '3001');
+const port = searchPort(process.env.PORT || '3002');
 const server = http.createServer(app);
 
 server.listen(port, () => {

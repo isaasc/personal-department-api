@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Department = mongoose.model('Department');
+const { schemaDepartment } = require('./Department');
 
 const schemaPayroll = new Schema({
   personCode: {
@@ -20,7 +20,7 @@ const schemaPayroll = new Schema({
     required: [true, 'payrollCode is required'],
   },
   department: {
-    type: Department,
+    type: [schemaDepartment],
     required: [true, 'department is required'],
   },
 });
