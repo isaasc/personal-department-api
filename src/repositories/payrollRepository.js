@@ -12,7 +12,7 @@ exports.findAllPayrolls = async () => {
 };
 
 exports.findPayrollById = async (payrollId) => {
-  const payroll = await Payroll.findByOne({ _id: payrollId });
+  const payroll = await Payroll.findOne({ _id: payrollId });
   return payroll;
 };
 

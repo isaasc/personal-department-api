@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = require('mongoose').Types.ObjectId;
 
 const schemaDepartment = new Schema({
   departmentCode: {
@@ -10,14 +11,12 @@ const schemaDepartment = new Schema({
     type: String,
     required: [true, 'name is required'],
   },
-  sector: {
-    type: String,
-    required: [true, 'sector is required'],
+  idSector: {
+    type: ObjectId,
+    required: [true, 'idSector is required'],
   },
 });
 
-const Department = mongoose.model('Department', schemaDepartment);
 module.exports = {
-  Department,
   schemaDepartment,
 };

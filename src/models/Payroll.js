@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const ObjectId = require('mongoose').Types.ObjectId;
 const { schemaDepartment } = require('./Department');
 
 const schemaPayroll = new Schema({
-  personCode: {
-    type: String,
-    required: [true, 'personCode is required'],
+  idPerson: {
+    type: ObjectId,
+    required: [true, 'idPerson is required'],
   },
   salary: {
     type: Number,
@@ -15,12 +16,12 @@ const schemaPayroll = new Schema({
     type: Date,
     required: [true, 'date is required'],
   },
-  payrollCode: {
-    type: String,
-    required: [true, 'payrollCode is required'],
+  idDepartment: {
+    type: ObjectId,
+    required: [true, 'idDepartment is required'],
   },
   department: {
-    type: [schemaDepartment],
+    type: schemaDepartment,
     required: [true, 'department is required'],
   },
 });
